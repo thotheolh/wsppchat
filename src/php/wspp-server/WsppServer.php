@@ -1,10 +1,10 @@
 <?php
 use Ratchet\Server\IoServer;
-use Chat;
+use Wspp\Chat;
 
 $port = 8080;
 
-echo "Loading required framework...";
+echo "Loading required framework...\r\n";
 require __DIR__ . '/../../../vendor/autoload.php';
 
 echo "Starting WSPP Server...\r\n";

@@ -1,7 +1,7 @@
 {
     "autoload": {
-        "psr-0": {
-            "WsppHelper": "src"
+        "psr-4": {
+            "Wspp\\": "src/php/wspp-server/"
         }
     },
     "require": {
