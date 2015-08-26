@@ -19,14 +19,17 @@
  *
  */
 
-var connection = new WebSocket('ws://localhost/wspp');
+var connection = new WebSocket('ws://localhost:8080');
 
 connection.onopen = function () {
+	console.log("WSPP Client Connection Established !");
 };
 
 connection.onerror = function (e) {
 };
 
 connection.onmessage = function (e) {
-	
+	console.log(e.data);	
 };
+
+conn.send("Hello World !");
