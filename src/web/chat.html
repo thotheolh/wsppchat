@@ -1,6 +1,7 @@
 <html>
+	<script src="wsppchat.js"></script>
 	<head></head>
-	<body>
+	<body onload="connect();">
 		<form name="chatForm">
 			<table width=100% height=100% border=1>
 				<tr>
@@ -16,16 +17,28 @@
 			</table>
 		</form>
 		
+
+
+		<!-- Local UI functionality scripts -->
 		<script>
+			function sendMsg(msg) {
+				sendText(msg);
+			}
+			
+			function helloworld() {
+				alert('helloworld');
+			}
+
 			function onChatEntry(evt) {
 				if(evt.keyCode == 13) {
 					var inputText = document.chatForm.chatInput.value.trim();
 					if (inputText != '') {
-						var displayText = "\n> " + inputText;
-						document.chatForm.chatDisplay.value += displayText;
-						scrollChatDisplayBottom();
+						displayToScreen(inputText);
 					}
 					document.chatForm.chatInput.value = "";
+					sendMsg(inputText);
+					//helloworld();
+						
 					return false;
 				}
 
@@ -35,6 +48,14 @@
 			function scrollChatDisplayBottom() {
 				document.chatForm.chatDisplay.scrollTop = document.chatForm.chatDisplay.scrollHeight;
 			}
+
+			function displayToScreen(msg) {
+				var displayText = "\n> " + msg;
+				document.chatForm.chatDisplay.value += displayText;
+				scrollChatDisplayBottom();
+			}
 		</script>
+
+		
 	</body>
 </html>

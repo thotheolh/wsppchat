@@ -19,17 +19,36 @@
  *
  */
 
-var connection = new WebSocket('ws://localhost:8080');
+var connection;
 
-connection.onopen = function () {
-	console.log("WSPP Client Connection Established !");
-};
+function connect() {
+	connection = new WebSocket('ws://localhost:8080');
 
-connection.onerror = function (e) {
-};
+	connection.onopen = function () {
+		console.log("WSPP Client Connection Established !");
+	};
 
-connection.onmessage = function (e) {
-	console.log(e.data);	
-};
+	connection.onerror = function (e) {
+	};
 
-conn.send("Hello World !");
+	connection.onmessage = function (e) {
+		console.log("RCV: " + e.data);
+		displayToScreen(e.data);
+	};
+}
+
+function attemptConnect() {
+	if (typeof connection === 'undefined') {
+		connect();
+	}
+}
+
+function sendText(msg) {
+	attemptConnect();
+	connection.send(msg);
+}
+
+function sendBinary(msg) {
+	attemptConnect();
+	connection.send(msg);
+}
