@@ -19,21 +19,42 @@
  *
  */
 
+/*
+ * GLOBS
+ */
 var connection;
 
+
+/*
+ * FLAGS
+ */
+var DO_ENCRYPT_SIGN = 11;
+var DO_DECRYPT_VERIFY = 12;
+var DO_ENCRYPT = 13;
+var DO_DECRYPT = 14;
+var DO_SIGN = 15;
+var DO_VERIFY = 16;
+var DO_SEND = 21;
+var DO_RECV = 22;
+
+
+/*
+ * FUNCTIONS
+ */
 function connect() {
 	connection = new WebSocket('ws://localhost:8080');
 
 	connection.onopen = function () {
-		console.log("WSPP Client Connection Established !");
+		console.log("INFO | WSPP Client Connection Established !");
 	};
 
 	connection.onerror = function (e) {
+		console.log("ERR  | " + e.data);
 	};
 
 	connection.onmessage = function (e) {
-		console.log("RCV: " + e.data);
-		displayToScreen(e.data);
+		console.log("INFO | RCV: " + e.data);
+		displayToScreen(e.data, "");
 	};
 }
 
@@ -52,3 +73,17 @@ function sendBinary(msg) {
 	attemptConnect();
 	connection.send(msg);
 }
+
+function startSecureChannel() {
+}
+
+function doSecureChannelMsg() {
+}
+
+function closeSecureChannel() {
+}
+
+function processMessage(msg, mode) {
+}
+
+

@@ -16,28 +16,21 @@
 				</tr>
 			</table>
 		</form>
-		
-
 
 		<!-- Local UI functionality scripts -->
 		<script>
 			function sendMsg(msg) {
 				sendText(msg);
 			}
-			
-			function helloworld() {
-				alert('helloworld');
-			}
 
 			function onChatEntry(evt) {
 				if(evt.keyCode == 13) {
 					var inputText = document.chatForm.chatInput.value.trim();
 					if (inputText != '') {
-						displayToScreen(inputText);
+						displayToScreen(inputText, "me");
 					}
 					document.chatForm.chatInput.value = "";
 					sendMsg(inputText);
-					//helloworld();
 						
 					return false;
 				}
@@ -49,13 +42,11 @@
 				document.chatForm.chatDisplay.scrollTop = document.chatForm.chatDisplay.scrollHeight;
 			}
 
-			function displayToScreen(msg) {
-				var displayText = "\n> " + msg;
+			function displayToScreen(msg, user) {
+				var displayText = "\n" + user + "> " + msg;
 				document.chatForm.chatDisplay.value += displayText;
 				scrollChatDisplayBottom();
 			}
 		</script>
-
-		
 	</body>
 </html>

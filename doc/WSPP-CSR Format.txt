@@ -1,0 +1,68 @@
+Changing Certificates Request
+-----------------------------
+When an authentic WSPP user wants to change or renew certificate, they must use 
+their currently authorized and controllable keypair to sign the request for the
+new keypair.
+
+The CSR request are in UTF-8 and Hexadecimal formats that are easily readable by
+machines and humans alike to ease the inspection of the certificate requests by
+humans as compared to the current X.509 certificates which are highly unfriendly
+to human inspections.
+
+Encoding Formats for Certificate Request
+----------------------------------------
+All data should be encoded in UTF-8 format with the exception of hexadecimal
+bytes representing cryptographic variables like signed data, encrypted data and
+representations of cryptographic key bytes.
+
+The data should be encoded in a key-value pair with the delimiter between the 
+key and the value using the colon (':') character and the ending of each
+key-value pair to be marked with a semi-colon (';').
+
+Formats of Certificate Request
+------------------------------
+Representation of certain data formats should be as follow:
+ - Timestamps : DDMMYYYYHHMMSSSS
+
+   Example of 9th August 2015, 12:35:00 as 09082015123500
+
+ - Decimal Bytes should not start with 0x.
+
+Types of Certificate Request
+----------------------------
+Users may carefully use the listed certificate requests whenever they want.
+
+ - Register : Can only be used once during registration and will be ignored or
+              thrown error afterwards if re-used.
+
+ - Change   : Creates a verifiable change certificate request.
+
+ - Revoke   : CAUTION ! Using this paramter will UNREGISTER THE USER from the
+              WSPP server and perform CLEANUP of the user.
+
+
+Transmission of Certificate Request
+-----------------------------------
+The CSR can be transmitted in multiple parts but when reassembled for use, the
+CSR message must follow a specific order as shown below in numerical priority.
+
+Priority    Field
+1.          ReqType
+2.          NowPubBytes
+3.          NewPubBytes
+4.          NotBefore
+5.          NotAfter
+6.          ProofNew
+7.          ProofReq 
+
+Sample Certificate Change Format
+--------------------------------
+
+ReqType: Change;
+NowPubBytes:<Old Public Key hex bytes>;
+NewPubBytes:<New Public Key hex bytes>;
+NotBefore:<Timestamp of Request (DDMMYYYYHHMMSSSS)>;
+NotAfter:<Timestamp to limit freshness of request (DDMMYYYYHHMMSSSS)>;
+ProofNew:<NewPrivKey sign NewPubKey hex bytes (DDMMYYYYHHMMSSSS)>;
+ProofReq:<Current Pub Key Signing hex bytes of the entire data>;
+

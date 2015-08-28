@@ -19,14 +19,40 @@
  *
  */
 
+
+
+/*
+ * Global User Table. 
+ * Contains a user's data.
+ * 
+ * Data Fields:
+ *  - user_id : User's ID that is immutable.
+ *  - user_pubkey : User's own public key. User may change their keypairs on demand using WSPP-CSR format.
+ *  - server_accept_token : User's signature of the server's public key as a proof of trust.
+ *  - user_status : Indicates if a user is online or offline.
+ *  - settings : User's signed settings.
+ */
+
 User :
 {
+    user_id,
 	user_pubkey,
 	server_accept_token
 	user_status [online/offline],
-	display_msg,
 	settings
 }
+
+
+
+/*
+ * Global Message Store. 
+ * Contains all user encrypted messages.
+ * 
+ * Data Fields:
+ *  - msg_id : Message's ID.
+ *  - msg_timestamp : Timestamp of a message.
+ *  - msg_crypt_content : Encrypted contents of the message.
+ */
 
 MessageBox : 
 {
@@ -35,10 +61,24 @@ MessageBox :
 	msg_crypt_content
 }
 
+
+
+/*
+ * Global User Table. 
+ * Contains a user's data.
+ * 
+ * Data Fields:
+ *  - user_pubkey : User's own public key.
+ *  - server_accept_token : User's signature of the server's public key as a proof of trust.
+ *  - user_status : Indicates if a user is online or offline.
+ *  - settings : User's signed settings.
+ */
+
 Contacts :
 {
 	user_pubkey,
-	is_blocked
+	is_blocked,
+    crypt_other_info
 }
 
 Groups :
