@@ -1,0 +1,2 @@
+The WSPP Secure Channel Protocol is used to communicate securely between the 
+WSPP Client and the WSPP Server. 
